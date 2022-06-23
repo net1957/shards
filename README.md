@@ -1,24 +1,33 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Test application to validate the problem with shards and attribute in models
 
-Things you may want to cover:
+it use:
+ - ruby 3.0.4
+ - rails 7.0.3 (without js)
+ - sqlite3
 
-* Ruby version
+to run it:
 
-* System dependencies
+* bundle
+* bin/rails db:setup
+* bin/rails server -b 127.0.0.1 -p 3000 -e development
 
-* Configuration
+the application start and work.
 
-* Database creation
+To see the problem we run it in production mode (it use the same databases that in development)
+* bin/rails server -b 127.0.0.1 -p 3000 -e production
 
-* Database initialization
+the application fail
 
-* How to run the test suite
+if you comment the line attribute in the Comment model it work
 
-* Services (job queues, cache servers, search engines, etc.)
+Comments:
 
-* Deployment instructions
+the model user is on the primary db (see ApplicationRecord class).
 
-* ...
+The model comment is on comdev_fr and comdev_de db.
+
+The shard param select the correct shard (see ComdevRecord class).
+
+No default shard is used.
